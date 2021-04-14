@@ -12,10 +12,10 @@ from matplotlib.figure import Figure
 class App:
     def __init__(self, root):
         # setting title
-        root.title("undefined")
+        root.title("CSV Graphical user interface")
         # setting window size
-        width = 550
-        height = 200
+        width = 600
+        height = 500
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height,
@@ -46,17 +46,17 @@ class App:
         self.__GLabel_544.place(x=150, y=50, width=70, height=25)
 
         # these canvases are broken, fix them
-        self.__GLineEdit_517 = tk.Canvas(root)
-        self.__GLineEdit_517.place(x=50, y=130, width=234, height=140)
+        self.canvas_config = tk.Canvas(root)
+        self.canvas_config.place(x=50, y=130, width=234, height=140)
 
-        self.__GLineEdit_985 = tk.Canvas(root)
-        self.__GLineEdit_985.place(x=310, y=130, width=239, height=139)
+        self.canvas_config_1 = tk.Canvas(root)
+        self.canvas_config_1.place(x=310, y=130, width=239, height=139)
 
-        self.__GLineEdit_392 = tk.Canvas(root)
-        self.__GLineEdit_392.place(x=50, y=290, width=233, height=157)
+        self.canvas_config_2 = tk.Canvas(root)
+        self.canvas_config_2.place(x=50, y=290, width=233, height=157)
 
-        self.__GLineEdit_700 = tk.Canvas(root)
-        self.__GLineEdit_700.place(x=310, y=290, width=234, height=158)
+        self.canvas_config_3 = tk.Canvas(root)
+        self.canvas_config_3.place(x=310, y=290, width=234, height=158)
 
     def __GButton_450_command(self):
         filePath = fd.askopenfilename(initialdir='.')
