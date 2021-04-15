@@ -44,19 +44,24 @@ class App:
         self.__GLabel_544["justify"] = "center"
         self.__GLabel_544["text"] = "label"
         self.__GLabel_544.place(x=150, y=50, width=70, height=25)
+        
+        # button config for  frame
+        self.buttonconfig = tk.Frame(root) 
+        
+        
 
         # these canvases are broken, fix them
-        self.canvas_config = tk.Canvas(root, bg = 'red', cursor = 'dot')
-        self.canvas_config.place(anchor = 'nw' , x=50, y=130, width=235, height=142)
+        self.canvas_config = tk.Canvas(root, cursor = 'dot')
+        self.canvas_config.place( x=50, y=130, width=235, height=142)
 
-        self.canvas_config_1 = tk.Canvas(root, bg = 'green', cursor = 'circle')
-        self.canvas_config_1.place(x=310, y=130, width=235, height=142)
+        self.canvas_config_1 = tk.Canvas(root, bg = 'white', cursor = 'circle')
+        self.canvas_config_1.place( x=310, y=130, width=235, height=142)
 
-        self.canvas_config_2 = tk.Canvas(root, bg = 'purple')
-        self.canvas_config_2.place(x=50, y=290, width=235, height=142)
+        self.canvas_config_2 = tk.Canvas(root, bg = 'cyan')
+        self.canvas_config_2.place( x=50, y=290, width=235, height=142)
 
-        self.canvas_config_3 = tk.Canvas(root, bg = 'orange')
-        self.canvas_config_3.place(x=310, y=290, width=235, height=142)
+        self.canvas_config_3 = tk.Canvas(root, )
+        self.canvas_config_3.place( x=310, y=290, width=235, height=142)
 
     def __GButton_450_command(self):
         filePath = fd.askopenfilename(initialdir='.')
