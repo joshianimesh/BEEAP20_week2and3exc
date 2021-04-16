@@ -7,7 +7,7 @@ from tkinter import filedialog as fd
 import tkinter.font as tkFont
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.pyplot import figure
+from matplotlib.pyplot import figure, Figure 
 
 #sources: 
 
@@ -16,7 +16,7 @@ class App:
         # setting title
         root.title("CSV Graphical user interface")
         # setting window size
-        width = 800
+        width = 600
         height = 600
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
@@ -56,9 +56,9 @@ class App:
         #self.chartconfig.pack(side=tk.BOTTOM, padx=6, pady=7)
 
         # these canvases are broken, fix them
-        self.canvas_config = tk.Canvas(root, cursor= 'dot')
+        self.canvas_config = tk.Canvas(root, bg='pink', cursor= 'dot')
         self.canvas_config.place( x=50, y=130, width=250, height=149)
-     
+       
 
         self.canvas_config_1 = tk.Canvas(root, bg='white', cursor= 'circle')
         self.canvas_config_1.place( x=310, y=130, width=250, height=149)
@@ -91,11 +91,19 @@ class App:
         print(f"chosen_kaupunki: {chosen_kaupunki}")
         self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == chosen_kaupunki]
         
+        figure1 = plt.figure(figsize=(6,5),dpi=80)
+        ax1 = figure1.add_subplot(111)
+        bar1 = FigureCanvasTkAgg(figure1, root)
+        bar1.get_tk_widget().place(x=50, y=130, width=250, height=155)
+        kJanIndx = (self.__subdf.columns.get_loc('KWH JANUARY 2010'))
+        print(kJanIndx)
+        df1 = self.__subdf.iloc[:, range(kJanIndx, kJanIndx+12)].mean().plot.bar(ax=ax1)
+        ax1.set_title('KWH avg')
+        
        
             
             
         
-
 
 
 if __name__ == "__main__":
