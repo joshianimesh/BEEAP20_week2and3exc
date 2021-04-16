@@ -116,7 +116,16 @@ class App:
         kJanIndx = (self.__subdf.columns.get_loc('KWH JANUARY 2010'))
         print(kJanIndx)
         df1 = self.__subdf.iloc[:, range(kJanIndx, kJanIndx+12)].max().plot.bar(ax=ax1)
-        ax1.set_title('KWHMaximal')
+        ax1.set_title('KWHMaximal') 
+        
+        figure1 = plt.figure(dpi=80)
+        ax1 = figure1.add_subplot(111)
+        bar1 = FigureCanvasTkAgg(figure1, root)
+        bar1.get_tk_widget().place(x=310, y=295, width=250, height=155)
+        ThermFebIndx = (self.__subdf.columns.get_loc('THERM FEBRUARY 2010'))
+        print(ThermFebIndx)
+        df1 = self.__subdf.iloc[:, range(ThermFebIndx, ThermFebIndx+11)].max().plot.bar(ax=ax1)
+        ax1.set_title('THERMmaximal')
         
        
             
