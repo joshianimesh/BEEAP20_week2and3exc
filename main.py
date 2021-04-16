@@ -56,8 +56,12 @@ class App:
         self.chartconfig.pack(side=tk.BOTTOM, padx=6, pady=7)
 
         # these canvases are broken, fix them
-        self.canvas_config = tk.Canvas(root, cursor = 'dot')
-        self.canvas_config.place( x=50, y=130, width=235, height=142)
+        self.canvas_config = tk.Canvas(self.chartconfig, cursor = 'dot')
+        self.canvas_config.place( relx=0, rely=0, relwidth=0.6, height=0.6)
+        self.canvas_config.update() 
+        self.fig1 = figure(figsize=(      self.canvas_config.winfo_width() / 100, self.canvas_config.winfo_height() /100   ), dpi=100)
+        self.ax1 = self.fig1.add_subplot(111)
+        self.chart1 = FigureCanvasTkAgg(self.fig1, self.canvas_config )
 
         self.canvas_config_1 = tk.Canvas(root, bg = 'white', cursor = 'circle')
         self.canvas_config_1.place( x=310, y=130, width=235, height=142)
@@ -88,7 +92,7 @@ class App:
         print(f"chosen_kaupunki: {chosen_kaupunki}")
         self.subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == chosen_kaupunki]
         
-        def northeast(self):
+        def northwest(self):
             
             self.chart1.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
             self.ax1.clear()
@@ -97,7 +101,7 @@ class App:
                     (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean()     )
             self.chart1.draw()
 
-        def northwest(self):
+        def northeast(self):
           
             self.chart2.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
             self.ax2.clear()
