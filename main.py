@@ -9,6 +9,8 @@ import tkinter.font as tkFont
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 
+#sources: 
+
 class App:
     def __init__(self, root):
         # setting title
@@ -35,7 +37,7 @@ class App:
 
         self.__GListBox_563 = ttk.Combobox(root)
         self.__GListBox_563.place(x=350, y=50, width=80, height=25)
-        self.__GListBox_563.bind("<<ComboboxSelected>>", self.__comboBoxCb)
+        self.__GListBox_563.bind("<<ComboboxSelected>>", self.chosen_kaupunki)
 
         self.__GLabel_544 = tk.Label(root)
         ft = tkFont.Font(family='Times', size=10)
@@ -45,10 +47,13 @@ class App:
         self.__GLabel_544["text"] = "label"
         self.__GLabel_544.place(x=150, y=50, width=70, height=25)
         
-        # button config for  frame
+  # buttonconfig for frame source: https://www.activestate.com/resources/quick-reads/how-to-use-pack-in-tkinter/
         self.buttonconfig = tk.Frame(root) 
+        self.buttonconfig.pack(ipadx=15, ipady=20)
         
-        
+        #chartconig for chart frame, frame = neatness 
+        self.chartconfig = tk.Frame(root) 
+        self.chartconfig.pack(side=tk.BOTTOM, padx=6, pady=7)
 
         # these canvases are broken, fix them
         self.canvas_config = tk.Canvas(root, cursor = 'dot')
@@ -78,12 +83,62 @@ class App:
     # top left: bar chart, average KWH by month
     # top right: bar chart, average THERM by month
     # bottom left and bottom right up to you
-    def __comboBoxCb(self, event=None):
-        self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == self.__GListBox_563.get()]
-        print(self.__subdf.head())
-        fig1 = Figure(figsize=(self.__GLineEdit_392.winfo_width, self.__GLineEdit_392.winfo_height), dpi=100)
-        ax1 = fig1.add_subplot(111)
-        self.__subdf.iloc[:, range(self.__subdf.columns.get_loc['KWH JANUARY 2010'], 12)].mean().plot.bar(ax=ax1)
+    def chosen_kaupunki(self, event=None):
+        chosen_kaupunki = self.__GListBox_563.get() 
+        print(f"chosen_kaupunki: {chosen_kaupunki}")
+        self.subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == chosen_kaupunki]
+        
+        def northeast(self):
+            
+            self.chart1.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
+            self.ax1.clear()
+            janind = self.__subdf.columns.get_loc("KWH JANUARY 2010")
+            self.ax1.bar(     range(1, 13),
+                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean()     )
+            self.chart1.draw()
+
+        def northwest(self):
+          
+            self.chart2.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
+            self.ax2.clear()
+            janind = self.__subdf.columns.get_loc("THERM JANUARY 2010")
+            self.ax2.bar(    range(1, 13),
+                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean()     )
+            self.chart2.draw()
+        
+        def southwest(self):
+          
+            self.chart3.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
+            self.ax3.clear()
+            janind = self.__subdf.columns.get_loc("KWH JANUARY 2010")
+            self.ax3.plot(     range(1, 13),
+                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).max(),
+                    color='red', marker ='*'    )
+            self.ax3.plot(     range(1, 13),
+                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean(),
+                    color='blue', marker ='s'    )
+            self.chart3.draw()
+        
+        def southeast(self):   
+            self.chart4.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
+            self.ax4.clear()
+            janind = self.__subdf.columns.get_loc("THERM JANUARY 2010")
+            self.ax4.plot(     range(1, 13),
+                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).max(),
+                    color='red', marker ='*'    )
+            self.ax4.plot(     range(1, 13),
+                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean(),
+                    color='blue', marker ='s'    )
+            self.chart4.draw()
+            
+            
+            
+        northeast(self)
+        northwest(self)
+        southeast(self)
+        southwest(self)
+
+        
 
 
 if __name__ == "__main__":
