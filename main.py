@@ -100,6 +100,15 @@ class App:
         df1 = self.__subdf.iloc[:, range(kJanIndx, kJanIndx+12)].mean().plot.bar(ax=ax1)
         ax1.set_title('KWH avg')
         
+        figure1 = plt.figure(figsize=(5,4),dpi=80)
+        ax1 = figure1.add_subplot(111)
+        bar1 = FigureCanvasTkAgg(figure1, root)
+        bar1.get_tk_widget().place(x=310, y=130, width=250, height=155)
+        kJanIndx = (self.__subdf.columns.get_loc('THERM JANUARY 2010'))
+        print(kJanIndx)
+        df1 = self.__subdf.iloc[:, range(kJanIndx, kJanIndx+12)].mean().plot.bar(ax=ax1)
+        ax1.set_title('THERM avg')
+        
        
             
             
