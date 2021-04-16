@@ -71,10 +71,14 @@ class App:
         self.chart2 = FigureCanvasTkAgg(self.fig1, self.canvas_config_1)
         
         self.canvas_config_2 = tk.Canvas(self.chartconfig, bg = 'cyan')
-        self.canvas_config_2.place( x=50, y=290, width=235, height=142)
-
+        self.canvas_config_2.place( relx=0, y=0.6, relwidth=0.6, relheight=0.6)
+        self.canvas_config_2.update() 
+        self.fig3 = figure(figsize=(      self.canvas_config_2.winfo_width() / 100, self.canvas_config_2.winfo_height() /100    ), dpi=100)
+        self.ax3 = self.fig1.add_subplot(111)
+        self.chart3 = FigureCanvasTkAgg(self.fig1, self.canvas_config_2 )
+        
         self.canvas_config_3 = tk.Canvas(self.chartconfig)
-        self.canvas_config_3.place( x=310, y=290, width=235, height=142)
+        self.canvas_config_3.place( relx=0.6, rely=0.6, relwidth=0.6, relheight=0.6)
 
     def __GButton_450_command(self):
         filePath = fd.askopenfilename(initialdir='.')
