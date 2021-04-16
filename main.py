@@ -16,8 +16,8 @@ class App:
         # setting title
         root.title("CSV Graphical user interface")
         # setting window size
-        width = 600
-        height = 500
+        width = 800
+        height = 600
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height,
@@ -58,31 +58,18 @@ class App:
         # these canvases are broken, fix them
         self.canvas_config = tk.Canvas(self.chartconfig, cursor= 'dot')
         self.canvas_config.place( relx=0, rely=0, relwidth=0.6, relheight=0.6)
-        self.canvas_config.update() 
-        self.fig1 = figure(figsize=(      self.canvas_config.winfo_width() / 100, self.canvas_config.winfo_height() /100   ), dpi=100)
-        self.ax1 = self.fig1.add_subplot(111)
-        self.chart1 = FigureCanvasTkAgg(self.fig1, self.canvas_config)
+     
 
         self.canvas_config_1 = tk.Canvas(self.chartconfig, bg='white', cursor= 'circle')
         self.canvas_config_1.place( relx=0.6, rely=0, relwidth=0.6, relheight=0.6)
-        self.canvas_config_1.update()
-        self.fig2 = figure(figsize=(      self.canvas_config_1.winfo_width() / 100, self.canvas_config_1.winfo_height() /100   ), dpi=100)
-        self.ax2 = self.fig1.add_subplot(111)
-        self.chart2 = FigureCanvasTkAgg(self.fig1, self.canvas_config_1)
         
         self.canvas_config_2 = tk.Canvas(self.chartconfig, bg='cyan')
         self.canvas_config_2.place( relx=0, y=0.6, relwidth=0.6, relheight=0.6)
-        self.canvas_config_2.update() 
-        self.fig3 = figure(figsize=(      self.canvas_config_2.winfo_width() / 100, self.canvas_config_2.winfo_height() /100    ), dpi=100)
-        self.ax3 = self.fig1.add_subplot(111)
-        self.chart3 = FigureCanvasTkAgg(self.fig1, self.canvas_config_2 )
+        
         
         self.canvas_config_3 = tk.Canvas(self.chartconfig, bg= 'purple')
         self.canvas_config_3.place( relx=0.6, rely=0.6, relwidth=0.6, relheight=0.6)
-        self.canvas_config_3.update() 
-        self.fig4 = figure(figsize=(      self.canvas_config_3.winfo_width() / 100, self.canvas_config_3.winfo_height() /100    ), dpi=100)
-        self.ax4 = self.fig1.add_subplot(111) 
-        self.chart4 = FigureCanvasTkAgg(self.fig1, self.canvas_config_3 )
+       
         
     def __GButton_450_command(self):
         filePath = fd.askopenfilename(initialdir='.')
@@ -104,57 +91,11 @@ class App:
         print(f"chosen_kaupunki: {chosen_kaupunki}")
         self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == chosen_kaupunki]
         
-        def northwest(self):
+       
             
-            self.chart1.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
-            self.ax1.clear()
-            janind = self.__subdf.columns.get_loc("KWH JANUARY 2010")
-            self.ax1.bar(     range(1, 13),
-                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean()     )
-            self.chart1.draw()
+            
+        
 
-        def northeast(self):
-          
-            self.chart2.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
-            self.ax2.clear()
-            janind = self.__subdf.columns.get_loc("THERM JANUARY 2010")
-            self.ax2.bar(    range(1, 13),
-                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean()     )
-            self.chart2.draw()
-        
-        def southwest(self):
-          
-            self.chart3.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
-            self.ax3.clear()
-            janind = self.__subdf.columns.get_loc("THERM DECEMBER 2010")
-            self.ax3.plot(     range(1, 13),
-                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).max(),
-                    color='red', marker ='o'    )
-            self.ax3.plot(     range(1, 13),
-                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean(),
-                    color='blue', marker ='o'    )
-            self.chart3.draw()
-        
-        def southeast(self):   
-            self.chart4.get_tk_widget().pack(side=tk.BOTTOM,fill=tk.BOTH,expand=True)
-            self.ax4.clear()
-            janind = self.__subdf.columns.get_loc("THERM MARCH 2010")
-            self.ax4.plot(     range(1, 13),
-                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).max(),
-                    color='red', marker ='*'    )
-            self.ax4.plot(     range(1, 13),
-                    (self.__subdf.iloc[ : ,  range(janind, (janind + 12))  ]).mean(),
-                    color='blue', marker ='o'    )
-            self.chart4.draw()
-            
-            
-            
-        northwest(self)
-        northeast(self)
-        southeast(self)
-        southwest(self)
-
-        
 
 
 if __name__ == "__main__":
