@@ -56,18 +56,18 @@ class App:
         self.chartconfig.pack(side=tk.BOTTOM, padx=6, pady=7)
 
         # these canvases are broken, fix them
-        self.canvas_config = tk.Canvas(self.chartconfig, cursor= 'dot')
+        self.canvas_config = tk.Canvas(root, cursor= 'dot')
         self.canvas_config.place( relx=0, rely=0, relwidth=0.6, relheight=0.6)
      
 
-        self.canvas_config_1 = tk.Canvas(self.chartconfig, bg='white', cursor= 'circle')
+        self.canvas_config_1 = tk.Canvas(root, bg='white', cursor= 'circle')
         self.canvas_config_1.place( relx=0.6, rely=0, relwidth=0.6, relheight=0.6)
         
-        self.canvas_config_2 = tk.Canvas(self.chartconfig, bg='cyan')
+        self.canvas_config_2 = tk.Canvas(root, bg='cyan')
         self.canvas_config_2.place( relx=0, y=0.6, relwidth=0.6, relheight=0.6)
         
         
-        self.canvas_config_3 = tk.Canvas(self.chartconfig, bg= 'purple')
+        self.canvas_config_3 = tk.Canvas(root, bg= 'purple')
         self.canvas_config_3.place( relx=0.6, rely=0.6, relwidth=0.6, relheight=0.6)
        
         
