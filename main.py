@@ -7,7 +7,7 @@ from tkinter import filedialog as fd
 import tkinter.font as tkFont
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.figure import Figure
+from matplotlib.pyplot import figure
 
 #sources: 
 
@@ -57,19 +57,23 @@ class App:
 
         # these canvases are broken, fix them
         self.canvas_config = tk.Canvas(self.chartconfig, cursor = 'dot')
-        self.canvas_config.place( relx=0, rely=0, relwidth=0.6, height=0.6)
+        self.canvas_config.place( relx=0, rely=0, relwidth=0.6, relheight=0.6)
         self.canvas_config.update() 
         self.fig1 = figure(figsize=(      self.canvas_config.winfo_width() / 100, self.canvas_config.winfo_height() /100   ), dpi=100)
         self.ax1 = self.fig1.add_subplot(111)
-        self.chart1 = FigureCanvasTkAgg(self.fig1, self.canvas_config )
+        self.chart1 = FigureCanvasTkAgg(self.fig1, self.canvas_config)
 
-        self.canvas_config_1 = tk.Canvas(root, bg = 'white', cursor = 'circle')
-        self.canvas_config_1.place( x=310, y=130, width=235, height=142)
-
-        self.canvas_config_2 = tk.Canvas(root, bg = 'cyan')
+        self.canvas_config_1 = tk.Canvas(self.chartconfig, bg = 'white', cursor = 'circle')
+        self.canvas_config_1.place( relx=0.6, rely=0, relwidth=0.6, relheight=0.6)
+        self.canvas_config_1.update()
+        self.fig2 = figure(figsize=(      self.canvas_config_1.winfo_width() / 100, self.canvas_config_1.winfo_height() /100   ), dpi=100)
+        self.ax2 = self.fig1.add_subplot(111)
+        self.chart2 = FigureCanvasTkAgg(self.fig1, self.canvas_config_1)
+        
+        self.canvas_config_2 = tk.Canvas(self.chartconfig, bg = 'cyan')
         self.canvas_config_2.place( x=50, y=290, width=235, height=142)
 
-        self.canvas_config_3 = tk.Canvas(root, )
+        self.canvas_config_3 = tk.Canvas(self.chartconfig)
         self.canvas_config_3.place( x=310, y=290, width=235, height=142)
 
     def __GButton_450_command(self):
