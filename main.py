@@ -12,7 +12,7 @@ from matplotlib.figure import Figure
 class App:
     def __init__(self, root):
         # setting title
-        root.title("undefined")
+        root.title("Data graphing application") #Renamed window
         # setting window size
         width = 600
         height = 500
@@ -60,6 +60,8 @@ class App:
 
     def __GButton_450_command(self):
         filePath = fd.askopenfilename(initialdir='.')
+        fileName = os.path.basename(filePath)
+        self.__GLabel_544["text"] = fileName  #changes "Label" to name of file
         try:
             self.__df = pd.read_csv(filePath)
             self.__df = self.__df.dropna()
