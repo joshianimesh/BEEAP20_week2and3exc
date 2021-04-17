@@ -23,27 +23,27 @@ class App:
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
 
-        self.__GButton_450 = tk.Button(root)
-        self.__GButton_450["bg"] = "#efefef"
+        self.button1 = tk.Button(root)
+        self.button1["bg"] = "#efefef"
         ft = tkFont.Font(family='Times', size=10)
-        self.__GButton_450["font"] = ft
-        self.__GButton_450["fg"] = "#000000"
-        self.__GButton_450["justify"] = "center"
-        self.__GButton_450["text"] = "Load CSV" #Changed name of the button to "Load CSV"
-        self.__GButton_450.place(x=70, y=50, width=70, height=25)
-        self.__GButton_450["command"] = self.__GButton_450_command
+        self.button1["font"] = ft
+        self.button1["fg"] = "#000000"
+        self.button1["justify"] = "center"
+        self.button1["text"] = "Load CSV" #Changed name of the button to "Load CSV"
+        self.button1.place(x=70, y=50, width=70, height=25)
+        self.button1["command"] = self.button1_command
 
-        self.__GListBox_563 = ttk.Combobox(root)
-        self.__GListBox_563.place(x=350, y=50, width=80, height=25)
-        self.__GListBox_563.bind("<<ComboboxSelected>>", self.__comboBoxCb)
+        self.dropbox = ttk.Combobox(root)
+        self.dropbox.place(x=350, y=50, width=80, height=25)
+        self.dropbox.bind("<<ComboboxSelected>>", self.__comboBoxCb)
 
-        self.__GLabel_544 = tk.Label(root)
+        self.label1 = tk.Label(root)
         ft = tkFont.Font(family='Times', size=10)
-        self.__GLabel_544["font"] = ft
-        self.__GLabel_544["fg"] = "#333333"
-        self.__GLabel_544["justify"] = "center"
-        self.__GLabel_544["text"] = "label"
-        self.__GLabel_544.place(x=150, y=50, width=70, height=25)
+        self.label1["font"] = ft
+        self.label1["fg"] = "#333333"
+        self.label1["justify"] = "center"
+        self.label1["text"] = "label"
+        self.label1.place(x=150, y=50, width=185, height=25) #width changed
 
         # these canvases are broken, fix them
         self.__GLineEdit_517 = tk.Canvas(root)
@@ -58,14 +58,14 @@ class App:
         self.__GLineEdit_700 = tk.Canvas(root)
         self.__GLineEdit_700.place(x=310, y=290, width=234, height=158)
 
-    def __GButton_450_command(self):
+    def button1_command(self):
         filePath = fd.askopenfilename(initialdir='.')
         fileName = os.path.basename(filePath)
-        self.__GLabel_544["text"] = fileName  #changes "Label" to name of file
+        self.label1["text"] = fileName  #changes "Label" to name of file
         try:
             self.__df = pd.read_csv(filePath)
             self.__df = self.__df.dropna()
-            self.__GListBox_563['values'] = list(self.__df['COMMUNITY AREA NAME'].unique())
+            self.dropbox['values'] = list(self.__df['COMMUNITY AREA NAME'].unique())
         except:
             # quick and dirty, desired behavior would be to show a notification pop up that says
             # "nope!"
@@ -76,7 +76,7 @@ class App:
     # top right: bar chart, average THERM by month
     # bottom left and bottom right up to you
     def __comboBoxCb(self, event=None):
-        self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == self.__GListBox_563.get()]
+        self.__subdf = self.__df.loc[self.__df['COMMUNITY AREA NAME'] == self.dropbox.get()]
         print(self.__subdf.head())
         fig1 = Figure(figsize=(self.__GLineEdit_392.winfo_width, self.__GLineEdit_392.winfo_height), dpi=100)
         ax1 = fig1.add_subplot(111)
