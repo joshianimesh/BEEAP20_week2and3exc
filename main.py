@@ -57,6 +57,18 @@ class App:
 
         self.__GLineEdit_700 = tk.Canvas(root)
         self.__GLineEdit_700.place(x=310, y=290, width=234, height=158)
+        
+        
+        def popUp(self):
+        global pop
+        pop = Toplevel(root)
+        pop.title("Exception!")
+        pop.geometry("100x100")
+        pop.config(bg="white")
+        popLabel = Label(pop, text ="nope!", bg ="black", fg="white")
+        popLabel.pack(pady=10)
+        my_frame = Frame(pop, bg = "white")
+        my_frame(pady = 5)
 
     def button1_command(self):
         filePath = fd.askopenfilename(initialdir='.')
@@ -69,7 +81,7 @@ class App:
         except:
             # quick and dirty, desired behavior would be to show a notification pop up that says
             # "nope!"
-            print('nope')
+            self.popUp()
 
     # desired behavior: select one area, show 4 plots drawn on 4 canvases of that area: 
     # top left: bar chart, average KWH by month
